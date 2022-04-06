@@ -1,93 +1,58 @@
-var userFormEl = document.querySelector('#user-form');
-var nameInputEl = document.querySelector('#username');
-var repoContainerEl = document.querySelector('#repos-container');
-var repoSearchTerm = document.querySelector('#repo-search-term');
+$(function(){    
+    // create variables and assign them to DOM elements
+    var searchEl = $('#searchBtn');
+    var symbolInputEl = $('#symbolInput');
+    var symbolEl = $('#symbol');
+    var openEl = $('#open');
+    var highEl = $('#high');
+    var lowEl = $('#low');
+    var closeEl = $('#close');
+    var volumeEl = $('#volume');
+    var lastTradingDayEl = $('#lastTradingDay');
+    var previousCloseEl = $('#previousClose');
+    var changeEl = $('#change');
+    var percentChangeEl = $('#percentChange');
 
-var formSubmitHandler = function(event) {
-  // prevent page from refreshing
-  event.preventDefault();
 
-  // get value from input element
-  var username = nameInputEl.value.trim();
+    function getPrice(stockSymbol){
 
-  if (username) {
-    getUserRepos(username);
+        // This is our API Key
+        var APIKey = "ZPJN82R5I3MVTIE9";
+        userInput = '';
 
-    // clear old content
-    repoContainerEl.textContent = '';
-    nameInputEl.value = '';
-  } else {
-    alert('Please enter a GitHub username');
-  }
-};
+        $.ajax({
+            url: "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + stockSymbol + "&apikey=" + APIKey,
+            method: "GET"
+        })
+        .then(function(response) {
+            console.log(response);
+            symbolEl.text(response['Global Quote']['01. symbol']);
+            openEl.text(response['Global Quote']['02. open']);
+            highEl.text(response['Global Quote']['03. high']);
+            lowEl.text(response['Global Quote']['04. low']);
+            closeEl.text(response['Global Quote']['05. price']);
+            volumeEl.text(response['Global Quote']['06. volume']);
+            lastTradingDayEl.text(response['Global Quote']['07. latest trading day']);
+            previousCloseEl.text(response['Global Quote']['08. previous close']);
+            changeEl.text(response['Global Quote']['09. change']);
+            percentChangeEl.text(response['Global Quote']['10. change percent']);
 
-var getUserRepos = function(user) {
-  // format the github api url
-  var apiUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + user + '&interval=1min&apikey=ZPJN82R5I3MVTIE9';
 
-  // make a get request to url
-  fetch(apiUrl)
-    .then(function(response) {
-      // request was successful
-      if (response.ok) {
-        console.log(response);
-        response.json().then(function(data) {
-          console.log(data);
-          displayRepos(data, user);
-        });
-      } else {
-        alert('Error: ' + response.statusText);
-      }
-    })
-    .catch(function(error) {
-      alert('Unable to connect to GitHub');
-    });
-};
-
-var displayRepos = function(repos, searchTerm) {
-  // check if api returned any repos
-  if (repos.length === 0) {
-    repoContainerEl.textContent = 'No repositories found.';
-    return;
-  }
-
-  repoSearchTerm.textContent = searchTerm;
-
-  // loop over repos
-  for (var i = 0; i < repos.length; i++) {
-    // format repo name
-    var repoName = repos[i].owner.login + '/' + repos[i].name;
-
-    // create a container for each repo
-    var repoEl = document.createElement('div');
-    repoEl.classList = 'list-item flex-row justify-space-between align-center';
-
-    // create a span element to hold repository name
-    var titleEl = document.createElement('span');
-    titleEl.textContent = repoName;
-
-    // append to container
-    repoEl.appendChild(titleEl);
-
-    // create a status element
-    var statusEl = document.createElement('span');
-    statusEl.classList = 'flex-row align-center';
-
-    // check if current repo has issues or not
-    if (repos[i].open_issues_count > 0) {
-      statusEl.innerHTML =
-        "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + ' issue(s)';
-    } else {
-      statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
+            // $.ajax({
+            //     url: "https://api.openweathermap.org/data/2.5/forecast?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + APIKey,
+            //     method: "GET" 
+            // })
+            // .then(function(forecastResponse) {
+            //     console.log(forecastResponse)
+            //     for(i = 0; i < forecastResponse.list.length ; i += 8) {
+            //         forecast.append(`<div>${((forecastResponse.list[i].main.temp - 273.15) * 9/5 + 32)}</div>`);
+            //         weatherIcon.attr("src", "https://openweathermap.org/img/wn/" + forecastResponse.list[i].weather[i].icon + "@4x.png")
+            //     }
+            // })
+        })
     }
 
-    // append to container
-    repoEl.appendChild(statusEl);
-
-    // append container to the dom
-    repoContainerEl.appendChild(repoEl);
-  }
-};
-
-// add event listeners to forms
-userFormEl.addEventListener('submit', formSubmitHandler);
+    searchEl.on("click", function() {
+        getPrice(symbolInputEl.val());
+    })
+})
