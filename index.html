@@ -11,10 +11,7 @@
             background-color: #3745c2;
             margin: 200px 40%;
         }
-        p {
-            color: white;
-        }
-        h1 {
+        h1, h2, p {
             color: white;
         }
         input {
@@ -26,15 +23,15 @@
     </style>
 </head>
 <body>
-    <header style="display:flex; justify-content: space-between;">
+    <div style="display:flex; justify-content: space-between;" id="searchHistory">
         <h1 style="margin-right: 30px;">InvestorHub</h1>
         <input type="search" id="symbolInput" placeholder="Enter symbol...">
         <button id="searchBtn">Search</button>
-    </header>
+    </div>
     <div class="row" style="margin-right: 100px;">
-        <div style="display: flex; justify-content: space-between;">
-            <h1 id="symbol">
-            <h1 id="lastTradingDay"></h1>
+        <div style="display: flex;">
+            <h2 id="symbol"></h2>
+            <h2 id="lastTradingDay"></h2>
         </div>
     </div>
     <div class="row">
@@ -64,11 +61,6 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <p id="lastTradingDay"></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
             <p id="previousClose"></p>
         </div>
     </div>
@@ -82,6 +74,13 @@
             <p id="percentChange"></p>
         </div>
     </div>
+    <canvas id="myChart" width="1600" height="900"></canvas>
+    
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/main.js"></script>
 </body>
