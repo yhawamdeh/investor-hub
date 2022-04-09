@@ -15,6 +15,12 @@ var searchStocks = [];
 // var searchCrypto = [];
 var searchHistory = $('.search-history');
 //var symbol = stockSymbol;
+var alertEl = $('#alert');
+
+function listArray() {
+    searchStocks.push(symbolInputEl.val());
+    localStorage.setItem("Symbol", (JSON.stringify(searchStocks)));
+}
 
 
 function getPrice(stockSymbol){
@@ -61,33 +67,15 @@ function getPrice(stockSymbol){
 //     })
 // }
 
-function listArray() {
-
-     // empty search history in sidebar                                |
-    // searchHistory.empty();                                          |
-    // // //each city added to array                                   |
-    // searchResults.forEach(function(symbol){                         |
-    //     var searchHistoryItem = $('<li class="list-group-item">');  |<------ HELP!!!!!!
-    //     searchHistoryItem.attr("data-value", symbol);               |
-    //     searchHistoryItem.text(symbol);                             |
-    //     cityHistory.prepend(searchHistoryItem);                     |
-    // });
-    // update city list history in local storage
-    localStorage.setItem("Symbol", (symbolInputEl.val()));
-}
 
 
 searchEl.on("click", function() {
-    if(symbolInputEl.val() === symbolInputEl.val()){
+    if(symbolInputEl.val()){
         getPrice(symbolInputEl.val());
         listArray();
-        // localStorage.setItem("input", JSON.stringify(searchResults));
-    // } else if (symbolInputEl.val() === 'AAPL') {
-    //     searchHistory.empty();
-    //     getCrypto(symbolInputEl.val());
-    //     //listArray();
+
     } else {
-        alert("Please enter a valid symbol") // instead create a <p>Not valid symbol</p> entry
+        alertEl.append(`<p>${'Please search a valid symbol'}</p>`);
     }
 })
 
@@ -96,12 +84,10 @@ symbolInputEl.on("keypress", function(e) {
         if(symbolInputEl.val() === 'AAPL' || 'MSFT' || 'TSLA'){ //how do we get ['Global Quote']['01. symbol']?
             getPrice(symbolInputEl.val());
             searchHistory.empty();
-           // listArray();
-        } else if (symbolInputEl.val() === 'BTC' || 'ETH' || 'LTC') { //how about here?
-            getCrypto(symbolInputEl.val());
-           // listArray();
+            listArray();
         } else {
-            alert("Please enter a valid symbol")
+            alertEl.append(`<p>${'Please search a valid symbol'}</p>`);
+
         }
     }
 })

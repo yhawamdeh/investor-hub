@@ -11,7 +11,10 @@ var lastTradeEl = $('#last-trade');
 var alertEl = $('#alert');
 
 
-
+function listArray() {
+    searchCrypto.push(cryptoInputEl.val());
+    localStorage.setItem("Symbol", (JSON.stringify(searchCrypto)));
+}
 
 
 
@@ -40,12 +43,7 @@ function getCrypto(cryptoSrc){
 searchEl.on("click", function() {
     if(cryptoInputEl.val() === cryptoInputEl.val()){
         getCrypto(cryptoInputEl.val());
-        //listArray();
-        // localStorage.setItem("input", JSON.stringify(searchResults));
-    // } else if (symbolInputEl.val() === 'AAPL') {
-    //     searchHistory.empty();
-    //     getCrypto(symbolInputEl.val());
-    //     //listArray();
+        listArray();
     } else {
         alert("Please enter a valid symbol"); // instead create a <p>Not valid symbol</p> entry
         alertEl.append('<p>Please enter a valid symbol</p>')
@@ -58,12 +56,11 @@ cryptoInputEl.on("keypress", function(e) {
         if(cryptoInputEl.val() === 'AAPL' || 'MSFT' || 'TSLA'){ //how do we get ['Global Quote']['01. symbol']?
             getCrypto(cryptoInputEl.val());
             searchHistory.empty();
-           // listArray();
-        // } else if (symbolInputEl.val() === 'BTC' || 'ETH' || 'LTC') { //how about here?
-        //     getCrypto(symbolInputEl.val());
-        //    // listArray();
+            listArray();
         } else {
-            alert("Please enter a valid symbol")
+
+
         }
     }
 })
+
