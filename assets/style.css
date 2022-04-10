@@ -27,14 +27,17 @@ header {
     margin-right: 20px;
 }
 
-p, h1, h2 {
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-}
 h1, h2 {
+    color: white;
     font-family: Gruppo;
     font-weight: 500;
     padding: 10px;
+}
+p {
+    color: white;
+    font-size: 20px;
+    padding-left: 10px;
+    font-weight: 200;
 }
 input {
     border-radius: 20px 0 0 20px;
