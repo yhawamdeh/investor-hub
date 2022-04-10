@@ -34,6 +34,7 @@ function getPrice(stockSymbol){
     })
     .then(function(response) {
         console.log(response);
+        $('#stocks-container').removeClass('d-none')
 //results appended to index
         symbolEl.text(response['Global Quote']['01. symbol']);
         openEl.text("Open: $" + response['Global Quote']['02. open']);
@@ -68,6 +69,7 @@ symbolInputEl.on("keypress", function(e) {
             getPrice(symbolInputEl.val());
           //  searchHistory.empty();          
             listArray();
+            alertEl.textContent = "";
         } else {
             alertEl.append(`<p>${'Please search a valid symbol'}</p>`);
 

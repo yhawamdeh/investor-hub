@@ -16,9 +16,8 @@ function listArray() {
     localStorage.setItem("Symbol", (JSON.stringify(searchCrypto)));
 }
 
-
 //function to retrieve api info for cryptocurrency
-function getCrypto(cryptoSrc){
+var getCrypto = function(cryptoSrc){
 
 // This is our API Key
     var APIKey = "89FC72D5-865C-4FA3-9035-6FFB67FEF2AE";
@@ -31,7 +30,8 @@ function getCrypto(cryptoSrc){
     .then(function(response) {
         console.log(response);
 //results appended to index
-        symbolIdEl.text(response['symbol_id']);
+        $('#stocks-container').removeClass('d-none')
+        symbolIdEl.text(response['symbol_id'].match(/BITSTAMP_SPOT_([A-Z]+)_USD/)[1]);
         askPriceEl.text("Ask price: " + response['ask_price']);
         askSizeEl.text("Ask size: " + response['ask_size']);
         bidPriceEl.text("Bid price: " + response['bid_price']);
@@ -53,13 +53,14 @@ searchEl.on("click", function() {
 //search button enter function
 cryptoInputEl.on("keypress", function(e) {
     if(e.key === 'Enter') {
-        if(cryptoInputEl.val()){ //how do we get ['Global Quote']['01. symbol']?
+        if(getCrypto){ //how do we get ['Global Quote']['01. symbol']?
             getCrypto(cryptoInputEl.val());
             searchHistory.empty();
             listArray();
+            // alertEl.removeChild(alertEl);
+            return;
         } else {
         alertEl.append('<p>Please enter a valid symbol</p>')
-
         }
     }
 })
