@@ -5,3 +5,7 @@
 
 ![Screen Shot 2022-04-10 at 4 15 24 PM](https://user-images.githubusercontent.com/96641766/162638073-a7b60723-83c1-4d80-889a-f5bd06f0cdce.png)
 
+### Live-link: https://yhawamdeh.github.io/investor-hub/
+
+### Languages Used: CSS, HTML, JavaScript
+
