@@ -1,0 +1,52 @@
+body {
+    background-color: #3745c2;
+}
+header {
+    background-color: #1b225c;
+    font-family: Gruppo;
+    font-weight: 700;
+
+}
+
+.navigation {
+    margin-left: 10px;
+}
+
+#about {
+    color: white;
+    background-color: #283392;
+
+}
+
+#search-bar {
+    display:flex; 
+    justify-content: space-between;
+}
+
+#search-bar h1 {
+    margin-right: 20px;
+}
+
+p, h1, h2 {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1, h2 {
+    font-family: Gruppo;
+    font-weight: 500;
+    padding: 10px;
+}
+input {
+    border-radius: 20px 0 0 20px;
+}
+button {
+    border-radius: 0 20px 20px 0;;
+} 
+
+.hide {
+    display: none;
+}
+
+.container-fluid {
+    margin:20px
+}
