@@ -1,39 +1,28 @@
 body {
     background-color: #3745c2;
-    /* margin: 200px 40%; */
+
 }
-.nav-item {
+header {
     background-color: #1b225c;
-    width:100%;
-    justify-items: auto;
 
 }
 
 #about {
+    color: white;
     background-color: #283392;
+
 }
 
 #search-bar {
     display:flex; 
     justify-content: space-between;
 }
-/* .search-history {
-    background-color: #283392;
-} */
+
 #search-bar h1 {
-    margin-right: 30px;
-}
-#lastTradingDay{
-    font-size: smaller;
+    margin-right: 20px;
 }
 
-#symbol-results-header{
-    margin-right: 100px;
-}
-p {
-    color: white;
-}
-h1 {
+p, h1, h2 {
     color: white;
 }
 input {
@@ -41,8 +30,4 @@ input {
 }
 button {
     border-radius: 0 20px 20px 0;;
-}
-
-#crypto-results-header {
-    margin-right: 100px;
-}
+} 

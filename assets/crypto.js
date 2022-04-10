@@ -29,7 +29,7 @@ function getCrypto(cryptoSrc){
     .then(function(response) {
         console.log(response);
     //results appended to index
-        symbolIdEl.text("Symbol ID: " + response['symbol_id']);
+        symbolIdEl.text(response['symbol_id']);
         askPriceEl.text("Ask price: " + response['ask_price']);
         askSizeEl.text("Ask size: " + response['ask_size']);
         bidPriceEl.text("Bid price: " + response['bid_price']);

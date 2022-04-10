@@ -11,75 +11,69 @@
 <body>
     <header>
         <h1>InvestorHub</h1>
-        <ul class="nav">
+        <ul class="nav nav-tabs">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+              <a class="nav-link " aria-current="page" href="./index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./index2.html">Search Stocks</a>
+              <a class="nav-link  active" href="./index2.html">Stocks</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./index3.html">Search Crypto</a>
+              <a class="nav-link" href="./index3.html">Crypto</a>
             </li>
           </ul>
     </header>
-    <div id="search-bar" class="container mt-20">
+    <div id="search-bar" class="container">
         <div class="row">
-            <div id="about" class="col-4 h-100">
+            <div id="about" class="col-sm-4 h-100 d-inline-block">
                 <h2>About:</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt illum labore sequi minus ad rerum ducimus? Magni tempore ea nisi dignissimos beatae, quos tempora unde, debitis sit, laborum vero suscipit?</p>
+                    <p>A stock is an investment thats gives you fractional ownership of a company.
+
+                    </p>
             </div>   
             <div class="col-8">
-                <h1>InvestorHub</h1>
+                <h2>Search Stocks</h2>
                     <input type="search" id="symbolInput" class="search-history" placeholder="Enter symbol...">
-                    <button id="searchBtn">Search</button>
+                    <button id="searchBtn"><i class="fa-solid fa-magnifying-glass-dollar"></i></button>
                         <div id="alert" class="border border-secondary rounded"></div>
+                            <h1 id="symbol"></h1><br>
+                            <h1 id="lastTradingDay"></h1>
+                <div id="stocks-container" class="container border border-secondary rounded">
+                    <div class="m-auto">
+                        <div>
+                            <p id="open"></p>
+                        </div>
+                        <div>
+                            <p id="high"></p>
+                        </div>
+                        <div>
+                            <p id="low"></p>
+                        </div>
+                        <div>
+                            <p id="close"></p>
+                        </div>
+                        <div>
+                            <p id="volume"></p>
+                        </div>
+                        <div >
+                            <p id="previousClose"></p>
+                        </div>
+                        <div >
+                            <p id="change"></p>
+                        </div>
+                        <div >
+                            <p id="percentChange"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
 
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class=" col-4">
-                <div id="symbol-results-header" class="row col-4">
-                    <h1 id="symbol"></h1><br>
-                    <h1 id="lastTradingDay"></h1>
-                </div>
-        <div id="stocks-container" class="container border border-secondary rounded">
-            <div class="col-6 inline-block m-auto">
-                <div>
-                    <p id="open"></p>
-                </div>
-                <div>
-                    <p id="high"></p>
-                </div>
-                <div>
-                    <p id="low"></p>
-                </div>
-                <div>
-                    <p id="close"></p>
-                </div>
-            </div>
-            <div class="col-6 inline-block m-auto">
-                <div>
-                    <p id="volume"></p>
-                </div>
-                <div >
-                    <p id="previousClose"></p>
-                </div>
-                <div >
-                    <p id="change"></p>
-                </div>
-                <div >
-                    <p id="percentChange"></p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <canvas id="myChart" width="1600" height="900"></canvas>
     
-        
+    <script src="https://kit.fontawesome.com/60388a0e59.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
