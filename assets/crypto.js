@@ -10,6 +10,7 @@ var bidSizeEl = $('#bid-size');
 var alertEl = $('#alert');
 var searchHistory = $('.search-history');
 
+//local storage
 function listArray() {
     searchCrypto.push(cryptoInputEl.val());
     localStorage.setItem("Symbol", (JSON.stringify(searchCrypto)));
@@ -18,17 +19,18 @@ function listArray() {
 
 //function to retrieve api info for cryptocurrency
 function getCrypto(cryptoSrc){
-    // This is our API Key
+
+// This is our API Key
     var APIKey = "89FC72D5-865C-4FA3-9035-6FFB67FEF2AE";
     userInput = '';
-    
+// call function   
     $.ajax({
         url: "https://rest.coinapi.io/v1/quotes/BITSTAMP_SPOT_" + cryptoSrc + "_USD/current?apikey=" + APIKey,
         method: "GET"
     })
     .then(function(response) {
         console.log(response);
-    //results appended to index
+//results appended to index
         symbolIdEl.text(response['symbol_id']);
         askPriceEl.text("Ask price: " + response['ask_price']);
         askSizeEl.text("Ask size: " + response['ask_size']);
@@ -37,7 +39,7 @@ function getCrypto(cryptoSrc){
     })
 }
 
-
+//search button click function
 searchEl.on("click", function() {
     if(cryptoInputEl.val()){
         getCrypto(cryptoInputEl.val());
@@ -48,7 +50,7 @@ searchEl.on("click", function() {
         console.log(alertEl);
     }
 })
-
+//search button enter function
 cryptoInputEl.on("keypress", function(e) {
     if(e.key === 'Enter') {
         if(cryptoInputEl.val()){ //how do we get ['Global Quote']['01. symbol']?

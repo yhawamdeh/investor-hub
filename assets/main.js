@@ -1,5 +1,6 @@
 var searchEl = $('#searchBtn');
 var symbolInputEl = $('#symbolInput');
+//var stocksContainerEl = $('#stocks-container');
 var symbolEl = $('#symbol');
 var openEl = $('#open');
 var highEl = $('#high');
@@ -23,10 +24,10 @@ function listArray() {
 // function to retrieve info from stock api
 function getPrice(stockSymbol){
 
-    // This is our API Key
+// This is our API Key
     var APIKey = "ZPJN82R5I3MVTIE9";
     userInput = '';
-
+// call function
     $.ajax({
         url: "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + stockSymbol + "&apikey=" + APIKey,
         method: "GET"
@@ -39,7 +40,7 @@ function getPrice(stockSymbol){
         highEl.text("High: $" + response['Global Quote']['03. high']);
         lowEl.text("Low: $" + response['Global Quote']['04. low']);
         closeEl.text("Close: $" + response['Global Quote']['05. price']);
-        volumeEl.text("Volume " + response['Global Quote']['06. volume']);
+        volumeEl.text("Volume: " + response['Global Quote']['06. volume']);
         lastTradingDayEl.text(response['Global Quote']['07. latest trading day']);
         previousCloseEl.text("Previous close: " + response['Global Quote']['08. previous close']);
         changeEl.text("Change: $" + response['Global Quote']['09. change']);
@@ -51,6 +52,7 @@ function getPrice(stockSymbol){
 searchEl.on("click", function() {
     if(symbolInputEl.val()){
         getPrice(symbolInputEl.val());
+
 //populate localstorage array
         listArray();
 
