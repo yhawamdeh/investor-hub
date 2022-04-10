@@ -7,15 +7,13 @@ var askPriceEl = $('#ask-price');
 var askSizeEl = $('#ask-size');
 var bidPriceEl = $('#bid-price');
 var bidSizeEl = $('#bid-size');
-var lastTradeEl = $('#last-trade');
 var alertEl = $('#alert');
-
+var searchHistory = $('.search-history');
 
 function listArray() {
     searchCrypto.push(cryptoInputEl.val());
     localStorage.setItem("Symbol", (JSON.stringify(searchCrypto)));
 }
-
 
 
 //function to retrieve api info for cryptocurrency
@@ -30,22 +28,22 @@ function getCrypto(cryptoSrc){
     })
     .then(function(response) {
         console.log(response);
+    //results appended to index
         symbolIdEl.text("Symbol ID: " + response['symbol_id']);
         askPriceEl.text("Ask price: " + response['ask_price']);
         askSizeEl.text("Ask size: " + response['ask_size']);
         bidPriceEl.text("Bid price: " + response['bid_price']);
         bidSizeEl.text("Bid size: " + response['bid_size']);
-        lastTradeEl.text("Last trade: " + response['last_trade']);
     })
 }
 
 
 searchEl.on("click", function() {
-    if(cryptoInputEl.val() === cryptoInputEl.val()){
+    if(cryptoInputEl.val()){
         getCrypto(cryptoInputEl.val());
+        searchHistory.empty();
         listArray();
     } else {
-        alert("Please enter a valid symbol"); // instead create a <p>Not valid symbol</p> entry
         alertEl.append('<p>Please enter a valid symbol</p>')
         console.log(alertEl);
     }
@@ -53,14 +51,13 @@ searchEl.on("click", function() {
 
 cryptoInputEl.on("keypress", function(e) {
     if(e.key === 'Enter') {
-        if(cryptoInputEl.val() === 'AAPL' || 'MSFT' || 'TSLA'){ //how do we get ['Global Quote']['01. symbol']?
+        if(cryptoInputEl.val()){ //how do we get ['Global Quote']['01. symbol']?
             getCrypto(cryptoInputEl.val());
             searchHistory.empty();
             listArray();
         } else {
-
+        alertEl.append('<p>Please enter a valid symbol</p>')
 
         }
     }
 })
-

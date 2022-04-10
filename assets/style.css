@@ -2,6 +2,12 @@ body {
     background-color: #3745c2;
     /* margin: 200px 40%; */
 }
+.nav-item {
+    background-color: #1b225c;
+    width:100%;
+    justify-items: auto;
+
+}
 
 #about {
     background-color: #283392;

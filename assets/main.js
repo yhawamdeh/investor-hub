@@ -1,7 +1,6 @@
 var searchEl = $('#searchBtn');
 var symbolInputEl = $('#symbolInput');
 var symbolEl = $('#symbol');
-// var cryptoEl = $('#crypto');
 var openEl = $('#open');
 var highEl = $('#high');
 var lowEl = $('#low');
@@ -12,17 +11,16 @@ var previousCloseEl = $('#previousClose');
 var changeEl = $('#change');
 var percentChangeEl = $('#percentChange');
 var searchStocks = [];
-// var searchCrypto = [];
 var searchHistory = $('.search-history');
-//var symbol = stockSymbol;
+var symbol = [];
 var alertEl = $('#alert');
 
+//local storage
 function listArray() {
     searchStocks.push(symbolInputEl.val());
     localStorage.setItem("Symbol", (JSON.stringify(searchStocks)));
 }
-
-
+// function to retrieve info from stock api
 function getPrice(stockSymbol){
 
     // This is our API Key
@@ -35,6 +33,7 @@ function getPrice(stockSymbol){
     })
     .then(function(response) {
         console.log(response);
+//results appended to index
         symbolEl.text(response['Global Quote']['01. symbol']);
         openEl.text("Open: $" + response['Global Quote']['02. open']);
         highEl.text("High: $" + response['Global Quote']['03. high']);
@@ -48,42 +47,24 @@ function getPrice(stockSymbol){
 
     })  
 }
-
-// function getCrypto(cryptoSrc){
-//     // This is our API Key
-//     var APIKey = "89FC72D5-865C-4FA3-9035-6FFB67FEF2AE";
-//     userInput = '';
-    
-//     $.ajax({
-//         url: "https://rest.coinapi.io/v1/quotes/BITSTAMP_SPOT_" + cryptoSrc + "_USD/current?apikey=" + APIKey,
-//         method: "GET"
-//     })
-//     .then(function(response) {
-//         console.log(response);
-//         cryptoEl.text("Ask price: " + response['ask_price']);
-//         // cryptoEl.text(response['ask_price']);
-//         // cryptoEl.text(response['ask_price']);
-//         // cryptoEl.text(response['ask_price']);
-//     })
-// }
-
-
-
+// search button click function
 searchEl.on("click", function() {
     if(symbolInputEl.val()){
         getPrice(symbolInputEl.val());
+//populate localstorage array
         listArray();
 
     } else {
+        //(symbolInputEl.val() == null ) //not working
         alertEl.append(`<p>${'Please search a valid symbol'}</p>`);
     }
 })
-
+//search button enter function
 symbolInputEl.on("keypress", function(e) {
     if(e.key === 'Enter') {
-        if(symbolInputEl.val() === 'AAPL' || 'MSFT' || 'TSLA'){ //how do we get ['Global Quote']['01. symbol']?
+        if(symbolInputEl.val()){ //how do we get ['Global Quote']['01. symbol']?
             getPrice(symbolInputEl.val());
-            searchHistory.empty();
+          //  searchHistory.empty();          
             listArray();
         } else {
             alertEl.append(`<p>${'Please search a valid symbol'}</p>`);
