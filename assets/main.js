@@ -20,13 +20,14 @@ function listArray() {
     searchStocks.push(symbolInputEl.val());
     localStorage.setItem("Symbol", (JSON.stringify(searchStocks)));
 }
-// function to retrieve info from stock api
+
+// function to retrieve info from stocks api
 function getPrice(stockSymbol){
 
-// This is our API Key
+    // This is our API Key
     var APIKey = "ZPJN82R5I3MVTIE9";
     userInput = '';
-// call function
+    // call function
     $.ajax({
         url: "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + stockSymbol + "&apikey=" + APIKey,
         method: "GET"
@@ -34,7 +35,7 @@ function getPrice(stockSymbol){
     .then(function(response) {
         console.log(response);
         $('#stocks-container').removeClass('d-none')
-//results appended to index
+        //results appended to index
         symbolEl.text(response['Global Quote']['01. symbol']);
         openEl.text("Open: $" + response['Global Quote']['02. open']);
         highEl.text("High: $" + response['Global Quote']['03. high']);
@@ -45,22 +46,21 @@ function getPrice(stockSymbol){
         previousCloseEl.text("Previous close: " + response['Global Quote']['08. previous close']);
         changeEl.text("Change: $" + response['Global Quote']['09. change']);
         percentChangeEl.text("Percent Change: " + response['Global Quote']['10. change percent']);
-
     })  
 }
+
 // search button click function
 searchEl.on("click", function() {
     if(symbolInputEl.val()){
         getPrice(symbolInputEl.val());
-
-//populate localstorage array
+        //populate localstorage array
         listArray();
-
     } else {
         //(symbolInputEl.val() == null ) //not working
         alertEl.append(`<p>${'Please search a valid symbol'}</p>`);
     }
-})
+});
+
 //search button enter function
 symbolInputEl.on("keypress", function(e) {
     if(e.key === 'Enter') {
@@ -74,4 +74,4 @@ symbolInputEl.on("keypress", function(e) {
 
         }
     }
-})
+});
